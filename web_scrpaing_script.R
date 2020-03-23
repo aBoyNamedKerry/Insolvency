@@ -51,8 +51,8 @@ list_of_insolvencies[[j]] <- c(html_text(node_category[2]),
 
 }
 
-start <- 3431095
-end <-  3444000
+start <- 3526854
+end <-  3536854
 
 list_of_insolvencies <- purrr::map(c(start:end),
                                        possibly(~{
@@ -61,7 +61,7 @@ list_of_insolvencies <- purrr::map(c(start:end),
   
   
   #set url 
-  url <-  paste("https://www.thegazette.co.uk/notice/",.x)
+  url <-  paste0("https://www.thegazette.co.uk/notice/",.x)
   page <- read_html(url)
   
   #ceatgory of notice
@@ -118,7 +118,8 @@ table(insolvency_df$Notice_type)
 insolvency_df <- insolvency_df %>% 
   filter(Company_name != "Actions",
          grepl("Resolutions for",
-               Notice_type), Date >"2019-11-01")
+               Notice_type), Date >"2019-11-01") %>%
+  arrange(Date)
 
 
 #plot the winding up resolutions over time:
@@ -148,7 +149,7 @@ write.csv(insolvency_df,
 ## --- pulll out individual elements
 
 
-url <-  paste("https://www.thegazette.co.uk/notice/",3431096) #3431096 #3431107
+url <-  paste0("https://www.thegazette.co.uk/notice/",3536854) #3431096 #3431107
 
 page <- read_html(url)
 
