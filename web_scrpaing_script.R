@@ -11,20 +11,15 @@ list_of_insolvencies <- list()
 j = 0
 
 #for(j in 1:length(3431095:3431120)){
-  for(i in 3431095:3431120) {
+  for(i in 3535835:3535836) {
 
 j <- j+1
 
 
 #set url 
-url <-  paste("https://www.thegazette.co.uk/notice/",i)
+url <-  paste0("https://www.thegazette.co.uk/notice/",i)
 page <- read_html(url)
 
-
-#nodes <- html_nodes(page, css = ".main")
-
-# list_of_insolvencies[[j]] <- c(gsub("\n", "", html_text(nodes[3])),
-#                                gsub("\n", "", html_text(nodes[4])))
 
 #ceatgory of notice
 node_category <- html_nodes(page, css = ".category")
@@ -51,8 +46,8 @@ list_of_insolvencies[[j]] <- c(html_text(node_category[2]),
 
 }
 
-start <- 3526854
-end <-  3536854
+start <- 3535835
+end <-  3535836
 
 list_of_insolvencies <- purrr::map(c(start:end),
                                        possibly(~{
@@ -91,7 +86,7 @@ list_of_insolvencies <- purrr::map(c(start:end),
                                  readr::parse_number(html_text(node_dd[6])),
                                  html_text(node_date[2]))
 
-  }, otherwise = NA_character_))
+  }, otherwise = NA_character_, quiet = FALSE))
 
 
 

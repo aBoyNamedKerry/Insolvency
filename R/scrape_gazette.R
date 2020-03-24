@@ -1,6 +1,9 @@
 scrape_gazette <- function(start, end){
 require(rvest)  
-require(dplyr)  
+require(dplyr)
+
+  j <- 0 # set counter for list
+  list_of_insolvencies <- list() # empty list to add to
   
   list_of_insolvencies <-
     purrr::map(c(start:end),
@@ -35,10 +38,10 @@ require(dplyr)
                                                 html_text(node_accessible[2]),
                                                 html_text(node_co_name[1]),
                                                 readr::parse_number(html_text(node_dd[6])),
-                                                html_text(node_date[2]),
+                                                html_text(node_date[[1]]),
                                                 .x)
                  
-               }, otherwise = NA_character_))
+               }, otherwise = NA))
   
                  
                  
