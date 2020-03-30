@@ -3,6 +3,7 @@
 ## Date: 2020-03-23
 
 source("R/scrape_gazette.R")
+source("R/insolvency_ts_plot.R")
 library(tidyverse)
 
 test_list<- scrape_gazette(start = 3530836, end = 3535836)
@@ -80,3 +81,17 @@ write.csv(insolvency_df,
           paste0("./outputs/", Sys.Date(),"_", 3525836,
                  "to", 3535836,"_Gazette_Insolvencies.csv"),
           row.names = FALSE)
+
+
+## Read in the data from previously:
+
+prev_data <- data.table::fread("./outputs/2020-03-24_3525836to3535836_Gazette_Insolvencies.csv")
+
+
+insolvency_ts_plot(df = prev_data, date_col = Date)
+
+
+#test  - 100
+
+test_list <- scrape_gazette(start = min(prev_data$notice_id) - 100, 
+                            end = prev_data$notice_id )
