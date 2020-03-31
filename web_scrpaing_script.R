@@ -144,7 +144,7 @@ write.csv(insolvency_df,
 ## --- pulll out individual elements
 
 
-url <-  paste0("https://www.thegazette.co.uk/notice/",3536854) #3431096 #3431107
+url <-  paste0("https://www.thegazette.co.uk/notice/",3526475) #3431096 #3431107
 
 page <- read_html(url)
 
@@ -201,5 +201,6 @@ co_num <-  html_text(node_dd[6])
 
 readr::parse_number(co_num)
 
+str_extract(co_num, pattern = "[[:digit:]]+" )
 
 

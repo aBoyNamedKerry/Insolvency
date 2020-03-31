@@ -37,7 +37,8 @@ require(dplyr)
                                                 html_text(node_type[2]),
                                                 html_text(node_accessible[2]),
                                                 html_text(node_co_name[1]),
-                                                readr::parse_number(html_text(node_dd[6])),
+                                                #readr::parse_number(html_text(node_dd[6])),
+                                                str_extract(node_dd[6], pattern = "[[:digit:]]+" ),
                                                 html_text(node_date[[1]]),
                                                 .x)
                  
